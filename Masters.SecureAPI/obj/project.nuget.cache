@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "lELa0yPMhpu22HgpU/YOjyHfMQF1844fz690YLfacYNMTeaMmZ4pHVDBgCThYJpztCIxOzTCWERSd9118DkMXg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Herkus\\source\\repos\\Masters\\Masters.SecureAPI\\Masters.SecureAPI.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Herkus\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\Herkus\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\Herkus\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
+    "C:\\Users\\Herkus\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
+    "C:\\Users\\Herkus\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
+    "C:\\Users\\Herkus\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.2.3\\swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512"
+  ],
+  "logs": []
+}
