@@ -13,7 +13,6 @@ namespace Masters.IDP.Extensions
 
             builder.Services.AddIdentityServer(options =>
                 {
-                    options.EmitStaticAudienceClaim = true;
                     options.MutualTls.Enabled = true;
                     options.MutualTls.ClientCertificateAuthenticationScheme = "mTLS";
                 })
@@ -21,7 +20,6 @@ namespace Masters.IDP.Extensions
                 .AddInMemoryIdentityResources(Config.IdentityResources)
                 .AddInMemoryApiScopes(Config.ApiScopes)
                 .AddConfigurationStore("HOST=::1;PORT=5432;DATABASE=idp;Uid=postgres;Pwd=admin;");
-
             return builder.Build();
         }
 
