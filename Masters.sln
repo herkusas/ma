@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masters.IDP", "Masters.IDP\Masters.IDP.csproj", "{866F65AF-8754-4D24-80C5-F71AB5299853}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masters.IDP", "src\Masters.IDP\Masters.IDP.csproj", "{866F65AF-8754-4D24-80C5-F71AB5299853}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masters.SecureAPI", "Masters.SecureAPI\Masters.SecureAPI.csproj", "{C16F5E9E-DF6D-41AB-8DAE-B2174A9317A1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masters.SecureAPI", "src\Masters.SecureAPI\Masters.SecureAPI.csproj", "{C16F5E9E-DF6D-41AB-8DAE-B2174A9317A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masters.AdminAPI", "Masters.AdminAPI\Masters.AdminAPI.csproj", "{8FFBF09C-B4DA-42C6-A7DA-CEEE91C6EF99}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masters.AdminAPI", "src\Masters.AdminAPI\Masters.AdminAPI.csproj", "{8FFBF09C-B4DA-42C6-A7DA-CEEE91C6EF99}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
