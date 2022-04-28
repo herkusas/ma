@@ -15,6 +15,7 @@ namespace Masters.IDP.Extensions
                 {
                     options.MutualTls.Enabled = true;
                     options.MutualTls.ClientCertificateAuthenticationScheme = "mTLS";
+                    options.MutualTls.DomainName = "mtls";
                 })
                 .AddMutualTlsSecretValidators()
                 .AddInMemoryIdentityResources(Config.IdentityResources)

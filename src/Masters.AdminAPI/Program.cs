@@ -1,25 +1,40 @@
+using Masters.AdminAPI.Authorization;
+using Masters.Shared.CertificateValidationMiddleware;
+using Masters.Shared.HostingExtensions;
+using Masters.Shared.Options;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
+using Microsoft.AspNetCore.Server.Kestrel.Https;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
+builder.Services.Configure<KestrelServerOptions>(options =>
+{
+    options.ConfigureHttpsDefaults(httpsConnectionAdapterOptions =>
+        httpsConnectionAdapterOptions.ClientCertificateMode = ClientCertificateMode.AllowCertificate);
+});
+
+var authenticationOptions = new AuthOptions();
+builder.Configuration.Bind(nameof(AuthOptions), authenticationOptions);
+
+builder.AddAuthentication(authenticationOptions);
+
+builder.AddAuthorization(policies: new Dictionary<string, string>
+{
+    {nameof(Policies.ManageResources), Policies.ManageResources},
+    {nameof(Policies.ManageRobots), Policies.ManageRobots}
+});
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+app.UseAuthentication();
 
 app.MapControllers();
+
+app.UseAuthorization();
 
 app.Run();

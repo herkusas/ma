@@ -1,5 +1,4 @@
-﻿using Masters.IDP;
-using Masters.IDP.Extensions;
+﻿using Masters.IDP.Extensions;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.Server.Kestrel.Https;
 using Serilog;

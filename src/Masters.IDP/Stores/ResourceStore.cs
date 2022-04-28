@@ -22,8 +22,8 @@ public class ResourceStore : IResourceStore
     {
         const string query = "SELECT * FROM api_scopes WHERE api_scopes.name = ANY(@scopeNames)";
         await using var connection = new NpgsqlConnection(_connectionString);
-        var result = await connection.QueryAsync<ApiScope>(query, new {scopeNames});
-        return result;
+        var result = await connection.QueryAsync<ApiScope>(query, new {scopeNames = scopeNames.ToArray()});
+        return result.Distinct();
     }
 
     public async Task<IEnumerable<ApiResource>> FindApiResourcesByScopeNameAsync(IEnumerable<string> scopeNames)
@@ -39,9 +39,9 @@ public class ResourceStore : IResourceStore
         
         var apiResources = await connection.QueryAsync<ApiResource, string, ApiResource>(
             query, (apiResource, apiScope) => MapResource(tempDict,apiResource,apiScope),
-            new {scopeNames}, splitOn: "api_scope");
+            new {scopeNames = scopeNames.ToArray()}, splitOn: "api_scope");
         
-        return apiResources;
+        return apiResources.Distinct();
     }
 
     public async Task<IEnumerable<ApiResource>> FindApiResourcesByNameAsync(IEnumerable<string> apiResourceNames)
@@ -57,9 +57,9 @@ public class ResourceStore : IResourceStore
         
         var apiResources = await connection.QueryAsync<ApiResource, string, ApiResource>(
             query, (apiResource, apiScope) => MapResource(tempDict,apiResource,apiScope),
-            new {apiResourceNames}, splitOn: "api_scope");
+            new {apiResourceNames = apiResourceNames.ToArray()}, splitOn: "api_scope");
         
-        return apiResources;
+        return apiResources.Distinct();
     }
 
     public Task<Resources> GetAllResourcesAsync()

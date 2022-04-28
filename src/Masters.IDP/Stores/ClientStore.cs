@@ -25,7 +25,8 @@ internal class ClientStore : IClientStore
                              "LEFT JOIN client_secrets ON client_secrets.client_id = clients.id " +
                              "LEFT JOIN client_scopes ON client_scopes.client_id = clients.id " +
                              "LEFT JOIN api_scopes ON api_scopes.id = client_scopes.id  " +
-                             "LEFT JOIN client_grants ON client_grants.client_id = clients.id";
+                             "LEFT JOIN client_grants ON client_grants.client_id = clients.id " +
+                             "WHERE clients.client_id = @clientId";
 
         await using var connection = new NpgsqlConnection(_connectionString);
 
