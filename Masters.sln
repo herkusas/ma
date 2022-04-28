@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masters.SecureAPI", "src\Ma
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masters.AdminAPI", "src\Masters.AdminAPI\Masters.AdminAPI.csproj", "{8FFBF09C-B4DA-42C6-A7DA-CEEE91C6EF99}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masters.Shared", "Masters.Shared\Masters.Shared.csproj", "{FAB81992-EA4F-4F9D-988F-A9DDC305FE73}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masters.Shared", "src\Masters.Shared\Masters.Shared.csproj", "{5501A34D-CF44-4A01-B2DF-1D6709D3559F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{8FFBF09C-B4DA-42C6-A7DA-CEEE91C6EF99}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8FFBF09C-B4DA-42C6-A7DA-CEEE91C6EF99}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8FFBF09C-B4DA-42C6-A7DA-CEEE91C6EF99}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FAB81992-EA4F-4F9D-988F-A9DDC305FE73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FAB81992-EA4F-4F9D-988F-A9DDC305FE73}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FAB81992-EA4F-4F9D-988F-A9DDC305FE73}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FAB81992-EA4F-4F9D-988F-A9DDC305FE73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5501A34D-CF44-4A01-B2DF-1D6709D3559F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5501A34D-CF44-4A01-B2DF-1D6709D3559F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5501A34D-CF44-4A01-B2DF-1D6709D3559F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5501A34D-CF44-4A01-B2DF-1D6709D3559F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
