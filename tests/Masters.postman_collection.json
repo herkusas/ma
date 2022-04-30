@@ -1,0 +1,333 @@
+{
+	"info": {
+		"_postman_id": "0aa0e26c-f8ff-4422-9c3e-7adb41c175f9",
+		"name": "Masters",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Masters.IDP",
+			"item": [
+				{
+					"name": "Konfigūracinis failas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.environment.set(\"mtls_idp_token_endpoint\",responseJson.mtls_endpoint_aliases.token_endpoint);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{idp_base_address}}/.well-known/openid-configuration",
+							"host": [
+								"{{idp_base_address}}"
+							],
+							"path": [
+								".well-known",
+								"openid-configuration"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Gauti žetoną",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"pm.environment.set(\"access_token\",responseJson.access_token);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "MegaClient",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "urn:masters:secure_api:weather:get",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{mtls_idp_token_endpoint}}",
+							"host": [
+								"{{mtls_idp_token_endpoint}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Master.AdminAPI",
+			"item": [
+				{
+					"name": "Registruoti resursą",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Host",
+								"value": "example.com",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"https://localhost:26005\",\r\n    \"scopes\": [\r\n        \"urn:xd:random\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7092/v1/resources",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7092",
+							"path": [
+								"v1",
+								"resources"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registruoti robotą",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Host",
+								"value": "example.com",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"robotId\": \"Robotukas\",\r\n    \"name\": \"Test client\",\r\n    \"scopes\": [\r\n        \"urn:xd:random\"\r\n    ],\r\n    \"thumbprints\": [\r\n        \"42BD490AC869ED79253392E00E31E0CCCEEF0724\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7092/v1/robots",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7092",
+							"path": [
+								"v1",
+								"robots"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "oauth2",
+				"oauth2": [
+					{
+						"key": "accessTokenUrl",
+						"value": "{{idp_base_address}}/connect/token",
+						"type": "string"
+					},
+					{
+						"key": "tokenName",
+						"value": "access_token",
+						"type": "string"
+					},
+					{
+						"key": "clientSecret",
+						"value": "{{admin_password}}",
+						"type": "string"
+					},
+					{
+						"key": "clientId",
+						"value": "{{admin_client_id}}",
+						"type": "string"
+					},
+					{
+						"key": "grant_type",
+						"value": "client_credentials",
+						"type": "string"
+					},
+					{
+						"key": "addTokenTo",
+						"value": "header",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Masters.SaugusAPI",
+			"item": [
+				{
+					"name": "Autentifikuota ir autorizuota užklausa",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Host",
+								"value": "example.com",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "https://localhost:7038/WeatherForecast",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7038",
+							"path": [
+								"WeatherForecast"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "oauth2",
+				"oauth2": [
+					{
+						"key": "accessTokenUrl",
+						"value": "{{mtls_idp_token_endpoint}}",
+						"type": "string"
+					},
+					{
+						"key": "clientId",
+						"value": "{{test_client_id}}",
+						"type": "string"
+					},
+					{
+						"key": "scope",
+						"value": "urn:masters:secure_api:weather:get",
+						"type": "string"
+					},
+					{
+						"key": "client_authentication",
+						"value": "body",
+						"type": "string"
+					},
+					{
+						"key": "tokenName",
+						"value": "access_token",
+						"type": "string"
+					},
+					{
+						"key": "grant_type",
+						"value": "client_credentials",
+						"type": "string"
+					},
+					{
+						"key": "addTokenTo",
+						"value": "header",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	]
+}

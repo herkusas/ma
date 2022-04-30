@@ -16,6 +16,15 @@ public class ExtendedResourceStore : IExtendedResourceStore
         _connectionString = connectionString;
     }
 
+    public async Task<bool> Exist(ApiResource apiResource)
+    {
+        const string query = "SELECT TRUE FROM api_resources WHERE api_resources.name = @name";
+        await using var connection = new NpgsqlConnection(_connectionString);
+        var result = await connection.ExecuteScalarAsync<bool>(query, new {name = apiResource.Name});
+        return result;
+    }
+        
+
     public Task<IEnumerable<IdentityResource>> FindIdentityResourcesByScopeNameAsync(IEnumerable<string> scopeNames)
     {
         return Task.FromResult<IEnumerable<IdentityResource>>(new List<IdentityResource>());
@@ -283,4 +292,5 @@ public class ExtendedResourceStore : IExtendedResourceStore
     private static Task UpdateApiResource(IDbConnection connection, IDbTransaction transaction,
         int id) =>
         connection.ExecuteAsync(@"UPDATE api_resources SET updated = current_timestamp WHERE api_resources.id = @id", new {id}, transaction);
+    
 }

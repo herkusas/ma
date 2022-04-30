@@ -1,5 +1,6 @@
 using Duende.IdentityServer.Models;
 using Masters.AdminAPI.Authorization;
+using Masters.AdminAPI.Model;
 using Masters.Storage.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -19,25 +20,20 @@ public class RobotsController : ControllerBase
     
     [HttpPut]
     [Authorize(Policy = nameof(Policies.ManageRobots))]
-    public async Task<IActionResult> Save()
+    public async Task<IActionResult> Save(RobotRecord request)
     {
-        var robot = new Client
-        {
-            ClientId = "MegaClient",
-            AllowedScopes = {},
-            ClientSecrets =
-            {
-                new Secret("42BD490AC869ED79253392E00E31E0CCCEEF0724")
-            }
-        };
+        var client = request.Map();
 
-        if (!await _extendedClientStore.AllScopeExist(robot.AllowedScopes))
+        var exist = await _extendedClientStore.Exist(client);
+
+        if (!await _extendedClientStore.AllScopeExist(client.AllowedScopes))
         {
-            return await Task.FromResult<IActionResult>(BadRequest());
+            return BadRequest(new {message = "Check if all scopes are registered within any resource"});
         }
 
-        await _extendedClientStore.Save(robot);
+        await _extendedClientStore.Save(client);
         
-        return await Task.FromResult<IActionResult>(Ok());
+        return exist ? Ok(request) : 
+            CreatedAtAction(nameof(Save), new {Id = request.RobotId}, request);
     }
 }

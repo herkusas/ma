@@ -16,6 +16,14 @@ public class ExtendedClientStore : IExtendedClientStore
         _connectionString = connectionString;
     }
 
+    public async Task<bool> Exist(Client client)
+    {
+        const string query = "SELECT TRUE FROM clients WHERE clients.client_id = @clientId";
+        await using var connection = new NpgsqlConnection(_connectionString);
+        var result = await connection.ExecuteScalarAsync<bool>(query, new {clientId = client.ClientId});
+        return result;
+    }
+    
     public async Task<Client?> FindClientByIdAsync(string clientId)
     {
         if (string.IsNullOrWhiteSpace(clientId)) return null;

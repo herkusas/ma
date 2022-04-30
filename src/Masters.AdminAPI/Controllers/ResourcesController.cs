@@ -1,5 +1,5 @@
-using Duende.IdentityServer.Models;
 using Masters.AdminAPI.Authorization;
+using Masters.AdminAPI.Model;
 using Masters.Storage.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -16,20 +16,18 @@ public class ResourcesController : ControllerBase
     {
         _resourceStore = resourceStore;
     }
-    
+
     [HttpPut]
     [Authorize(Policy = nameof(Policies.ManageResources))]
-    public async Task<IActionResult> Save()
+    public async Task<IActionResult> Save(ApiResourceRecord record)
     {
-        var test2 = new ApiResource("https://localhost:20001")
-        {
-            Scopes = new[] {"urn:random:scope"}
-        };
-
-        //await _resourceStore.Save(test);
+        var apiResource = record.Map();
         
-        await _resourceStore.Save(test2);
+        var exist = await _resourceStore.Exist(apiResource);
         
-        return await Task.FromResult<IActionResult>(Ok());
+        await _resourceStore.Save(apiResource);
+        
+        return exist ? Ok(record) : 
+            CreatedAtAction(nameof(Save), new {Id = record.Name}, record);
     }
 }

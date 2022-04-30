@@ -1,3 +1,4 @@
+using FluentValidation.AspNetCore;
 using Masters.AdminAPI.Authorization;
 using Masters.Shared.HostingExtensions;
 using Masters.Shared.Options;
@@ -8,7 +9,9 @@ using Microsoft.AspNetCore.Server.Kestrel.Https;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddFluentValidation(options =>
+    options.RegisterValidatorsFromAssemblyContaining<Program>(
+        includeInternalTypes: true, lifetime: ServiceLifetime.Singleton));
 builder.Services.AddEndpointsApiExplorer();
 
 Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
