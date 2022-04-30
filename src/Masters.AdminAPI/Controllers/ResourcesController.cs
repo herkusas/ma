@@ -21,12 +21,13 @@ public class ResourcesController : ControllerBase
     [Authorize(Policy = nameof(Policies.ManageResources))]
     public async Task<IActionResult> Save()
     {
-        var test = new ApiResource("https://localhost:20000")
+        var test2 = new ApiResource("https://localhost:20001")
         {
-            Scopes = new List<string>{"urn:random:scope"}
         };
 
-        await _resourceStore.Save(test);
+        //await _resourceStore.Save(test);
+        
+        await _resourceStore.Save(test2);
         
         return await Task.FromResult<IActionResult>(Ok());
     }

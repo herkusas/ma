@@ -6,5 +6,4 @@ namespace Masters.Storage.Contracts;
 public interface IExtendedResourceStore : IResourceStore
 {
     Task Save(ApiResource apiResource);
-    Task<bool> Exists(string name);
 }
