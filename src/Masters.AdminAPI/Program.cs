@@ -11,6 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
+Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
+
 builder.Services.Configure<KestrelServerOptions>(options =>
 {
     options.ConfigureHttpsDefaults(httpsConnectionAdapterOptions =>
@@ -20,6 +22,8 @@ builder.Services.Configure<KestrelServerOptions>(options =>
 builder.Services.AddSingleton(builder.Configuration.GetConnectionString("Postgres"));
 
 builder.Services.AddSingleton<IExtendedResourceStore, ExtendedResourceStore>();
+
+builder.Services.AddSingleton<IExtendedClientStore, ExtendedClientStore>();
 
 var authenticationOptions = new AuthOptions();
 builder.Configuration.Bind(nameof(AuthOptions), authenticationOptions);

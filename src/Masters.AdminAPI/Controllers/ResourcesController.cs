@@ -23,6 +23,7 @@ public class ResourcesController : ControllerBase
     {
         var test2 = new ApiResource("https://localhost:20001")
         {
+            Scopes = new[] {"urn:random:scope"}
         };
 
         //await _resourceStore.Save(test);

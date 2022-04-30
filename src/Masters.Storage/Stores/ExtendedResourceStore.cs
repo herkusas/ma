@@ -112,9 +112,9 @@ public class ExtendedResourceStore : IExtendedResourceStore
             var thereWasChanges = false;
             
             var toAddScopesFromApiResource =
-                apiResource.Scopes.Where(scope => !existingResource.Scopes.Contains(scope));
+                apiResource.Scopes.Where(scope => !existingResource.Scopes.Contains(scope, StringComparer.InvariantCultureIgnoreCase)).Distinct();
             var toRemoveScopesFromApiResource =
-                existingResource.Scopes.Where(scope => !apiResource.Scopes.Contains(scope));
+                existingResource.Scopes.Where(scope => !apiResource.Scopes.Contains(scope, StringComparer.InvariantCultureIgnoreCase)).Distinct();
             
             var existingApiScopesIds = new List<int>();
             var toAddApiScopes = new List<string>();
