@@ -1,4 +1,4 @@
-﻿using Masters.IDP.Stores;
+﻿using Masters.Storage.Stores;
 
 namespace Masters.IDP.Extensions;
 

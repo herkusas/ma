@@ -3,8 +3,9 @@ using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Stores;
 using Npgsql;
 
-namespace Masters.IDP.Stores;
+namespace Masters.Storage.Stores;
 
+// ReSharper disable once ClassNeverInstantiated.Global
 public class ResourceStore : IResourceStore
 {
     private readonly string _connectionString;
@@ -67,7 +68,7 @@ public class ResourceStore : IResourceStore
         return Task.FromResult(new Resources());
     }
     
-    private static ApiResource MapResource(IDictionary<string, ApiResource> tempDict, ApiResource apiResource, string apiScope)
+    private static ApiResource MapResource(IDictionary<string, ApiResource> tempDict, ApiResource apiResource, string? apiScope)
     {
         if (!tempDict.TryGetValue(apiResource.Name, out var currentResource))
         {

@@ -3,10 +3,10 @@ using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Stores;
 using Npgsql;
 
-namespace Masters.IDP.Stores;
+namespace Masters.Storage.Stores;
 
 // ReSharper disable once ClassNeverInstantiated.Global
-internal class ClientStore : IClientStore
+public class ClientStore : IClientStore
 {
     private readonly string _connectionString;
 
@@ -15,7 +15,7 @@ internal class ClientStore : IClientStore
         _connectionString = connectionString;
     }
 
-    public async Task<Client> FindClientByIdAsync(string clientId)
+    public async Task<Client?> FindClientByIdAsync(string clientId)
     {
         if (string.IsNullOrWhiteSpace(clientId)) return null;
 
@@ -30,14 +30,14 @@ internal class ClientStore : IClientStore
 
         await using var connection = new NpgsqlConnection(_connectionString);
 
-        var client = await connection.QueryAsync<Client, Secret, string, string, Client>(
+        IEnumerable<Client?> client = await connection.QueryAsync<Client, Secret, string, string, Client>(
             query, (client, clientSecret, allowedScope, allowedGrantType) => MapClient(tempDict, client, clientSecret, allowedScope, allowedGrantType),
             new {clientId}, splitOn: "type,allowed_scope,allowed_grant_types");
         return client.Distinct().FirstOrDefault();
     }
 
-    private static Client MapClient(IDictionary<string, Client> tempDict, Client client, Secret clientSecret,
-        string allowedScope, string allowedGrantType)
+    private static Client MapClient(IDictionary<string, Client> tempDict, Client client, Secret? clientSecret,
+        string? allowedScope, string? allowedGrantType)
     {
         if (!tempDict.TryGetValue(client.ClientId, out var currentClient))
         {

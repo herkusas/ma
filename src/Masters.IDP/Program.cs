@@ -17,8 +17,8 @@ try
 
     builder.Services.Configure<KestrelServerOptions>(options =>
     {
-        options.ConfigureHttpsDefaults(options =>
-            options.ClientCertificateMode = ClientCertificateMode.AllowCertificate);
+        options.ConfigureHttpsDefaults(httpsConnectionAdapterOptions =>
+            httpsConnectionAdapterOptions.ClientCertificateMode = ClientCertificateMode.AllowCertificate);
     });
     
     builder.Host.UseSerilog((ctx, lc) => lc
