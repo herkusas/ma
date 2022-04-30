@@ -1,16 +1,16 @@
 ﻿using Dapper;
 using Duende.IdentityServer.Models;
-using Duende.IdentityServer.Stores;
+using Masters.Storage.Contracts;
 using Npgsql;
 
 namespace Masters.Storage.Stores;
 
 // ReSharper disable once ClassNeverInstantiated.Global
-public class ClientStore : IClientStore
+public class ExtendedClientStore : IExtendedClientStore
 {
     private readonly string _connectionString;
 
-    public ClientStore(string connectionString)
+    public ExtendedClientStore(string connectionString)
     {
         _connectionString = connectionString;
     }
@@ -61,5 +61,19 @@ public class ClientStore : IClientStore
         }
         
         return currentClient;
+    }
+
+    public Task Save(Client client)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<bool> Exists(string clientId)
+    {
+        const string query = "SELECT true FROM clients WHERE clients.client_id = @clientId";
+        
+        await using var connection = new NpgsqlConnection(_connectionString);
+
+        return await connection.ExecuteScalarAsync<bool>(query, new {clientId});
     }
 }

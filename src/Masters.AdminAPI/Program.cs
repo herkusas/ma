@@ -1,7 +1,8 @@
 using Masters.AdminAPI.Authorization;
-using Masters.Shared.CertificateValidationMiddleware;
 using Masters.Shared.HostingExtensions;
 using Masters.Shared.Options;
+using Masters.Storage.Contracts;
+using Masters.Storage.Stores;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.Server.Kestrel.Https;
 
@@ -15,6 +16,10 @@ builder.Services.Configure<KestrelServerOptions>(options =>
     options.ConfigureHttpsDefaults(httpsConnectionAdapterOptions =>
         httpsConnectionAdapterOptions.ClientCertificateMode = ClientCertificateMode.AllowCertificate);
 });
+
+builder.Services.AddSingleton(builder.Configuration.GetConnectionString("Postgres"));
+
+builder.Services.AddSingleton<IExtendedResourceStore, ExtendedResourceStore>();
 
 var authenticationOptions = new AuthOptions();
 builder.Configuration.Bind(nameof(AuthOptions), authenticationOptions);

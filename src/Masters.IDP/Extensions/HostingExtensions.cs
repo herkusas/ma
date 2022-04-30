@@ -18,9 +18,7 @@ namespace Masters.IDP.Extensions
                     options.MutualTls.DomainName = "mtls";
                 })
                 .AddMutualTlsSecretValidators()
-                .AddInMemoryIdentityResources(Config.IdentityResources)
-                .AddInMemoryApiScopes(Config.ApiScopes)
-                .AddConfigurationStore("HOST=::1;PORT=5432;DATABASE=idp;Uid=postgres;Pwd=admin;");
+                .AddConfigurationStore(builder.Configuration.GetConnectionString("Postgres"));
             return builder.Build();
         }
 
