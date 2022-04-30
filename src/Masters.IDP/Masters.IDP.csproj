@@ -15,4 +15,9 @@
   <ItemGroup>
     <ProjectReference Include="..\Masters.Storage\Masters.Storage.csproj" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="keys\is-signing-key-9127C0F44ECCD4B417A6F5058B6016AB.json" />
+    <_ContentIncludedByDefault Remove="keys\is-signing-key-D20C1BE38441D0BA8EC5644045CDE9B4.json" />
+  </ItemGroup>
 </Project>
