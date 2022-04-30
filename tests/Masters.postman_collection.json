@@ -77,14 +77,13 @@
 								},
 								{
 									"key": "client_id",
-									"value": "MegaClient",
+									"value": "test_client",
 									"type": "text"
 								},
 								{
 									"key": "scope",
 									"value": "urn:masters:secure_api:weather:get",
-									"type": "text",
-									"disabled": true
+									"type": "text"
 								}
 							]
 						},
