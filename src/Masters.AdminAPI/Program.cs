@@ -1,3 +1,5 @@
+using System.Net;
+using System.Net.Mime;
 using FluentValidation.AspNetCore;
 using Masters.AdminAPI.Authorization;
 using Masters.Shared.HostingExtensions;
@@ -6,6 +8,7 @@ using Masters.Storage.Contracts;
 using Masters.Storage.Stores;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.Server.Kestrel.Https;
+using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,11 +38,13 @@ builder.AddAuthentication(authenticationOptions);
 
 builder.AddAuthorization(policies: new Dictionary<string, string>
 {
-    {nameof(Policies.ManageResources), Policies.ManageResources},
-    {nameof(Policies.ManageRobots), Policies.ManageRobots}
+    { nameof(Policies.ManageResources), Policies.ManageResources },
+    { nameof(Policies.ManageRobots), Policies.ManageRobots }
 });
 
 var app = builder.Build();
+
+app.UseErrorPages();
 
 app.UseHttpsRedirection();
 

@@ -7,13 +7,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Masters.Shared\Masters.Shared.csproj" />
       <ProjectReference Include="..\Masters.Shared\Masters.Shared.csproj" />
       <ProjectReference Include="..\Masters.Storage\Masters.Storage.csproj" />
     </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="FluentValidation.AspNetCore" Version="11.0.0" />
+      <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     </ItemGroup>
 
 </Project>

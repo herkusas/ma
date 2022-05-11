@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authentication.Certificate;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http;
 
-namespace Masters.Shared.CertificateValidationMiddleware;
+namespace Masters.Shared.Middlewares;
 
 public class CertificateAuthenticationMiddleware
 {

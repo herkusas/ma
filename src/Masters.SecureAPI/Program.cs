@@ -1,6 +1,6 @@
 using Masters.SecureAPI.Authorization;
-using Masters.Shared.CertificateValidationMiddleware;
 using Masters.Shared.HostingExtensions;
+using Masters.Shared.Middlewares;
 using Masters.Shared.Options;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.Server.Kestrel.Https;
@@ -24,6 +24,8 @@ builder.AddAuthentication(authenticationOptions);
 builder.AddAuthorization(policies: new Dictionary<string, string>{{nameof(Policies.GetWeather), Policies.GetWeather}});
 
 var app = builder.Build();
+
+app.UseErrorPages();
 
 app.UseHttpsRedirection();
 

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 
-namespace Masters.Shared.CertificateValidationMiddleware;
+namespace Masters.Shared.Middlewares;
 
 public static class RequestCultureMiddlewareExtensions
 {
