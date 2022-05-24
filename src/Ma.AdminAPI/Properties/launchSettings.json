@@ -1,0 +1,11 @@
+﻿{
+  "profiles": {
+    "Ma.AdminAPI": {
+      "commandName": "Project",
+      "applicationUrl": "https://localhost:7092;http://localhost:5092",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

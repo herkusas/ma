@@ -1,8 +1,8 @@
 ﻿<component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Master.WholeStack" type="CompoundRunConfigurationType">
-    <toRun name="Masters.AdminAPI" type="LaunchSettings" />
-    <toRun name="Masters.IDP: SelfHost" type="LaunchSettings" />
-    <toRun name="Masters.SecureAPI" type="LaunchSettings" />
+    <toRun name="Ma.AdminAPI" type="LaunchSettings" />
+    <toRun name="Ma.IDP: SelfHost" type="LaunchSettings" />
+    <toRun name="Ma.SecureAPI" type="LaunchSettings" />
     <method v="2" />
   </configuration>
 </component>

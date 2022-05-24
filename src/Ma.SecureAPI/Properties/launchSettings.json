@@ -1,0 +1,11 @@
+﻿{
+  "profiles": {
+    "Ma.SecureAPI": {
+      "commandName": "Project",
+      "applicationUrl": "https://localhost:7038;http://localhost:5038",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
