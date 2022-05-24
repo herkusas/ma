@@ -1,41 +1,40 @@
 using System.Security.Cryptography.X509Certificates;
 using Serilog;
 
-namespace Ma.IDP.Extensions
+namespace Ma.IDP.Extensions;
+
+internal static class HostingExtensions
 {
-    internal static class HostingExtensions
+    public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
     {
-        public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
-        {
-            builder.Services.AddAuthentication("mTLS")
-                .AddCertificate("mTLS", options
-                    => options.RevocationMode = X509RevocationMode.NoCheck);
+        builder.Services.AddAuthentication("mTLS")
+            .AddCertificate("mTLS", options
+                => options.RevocationMode = X509RevocationMode.NoCheck);
 
-            builder.Services.AddIdentityServer(options =>
-                {
-                    options.MutualTls.Enabled = true;
-                    options.MutualTls.ClientCertificateAuthenticationScheme = "mTLS";
-                    options.MutualTls.DomainName = "mtls";
-                })
-                .AddMutualTlsSecretValidators()
-                .AddConfigurationStore(builder.Configuration.GetConnectionString("Postgres"));
-            return builder.Build();
-        }
-
-        public static WebApplication ConfigurePipeline(this WebApplication app)
-        {
-            app.UseSerilogRequestLogging();
-
-            if (app.Environment.IsDevelopment())
+        builder.Services.AddIdentityServer(options =>
             {
-                app.UseDeveloperExceptionPage();
-            }
+                options.MutualTls.Enabled = true;
+                options.MutualTls.ClientCertificateAuthenticationScheme = "mTLS";
+                options.MutualTls.DomainName = "mtls";
+            })
+            .AddMutualTlsSecretValidators()
+            .AddConfigurationStore(builder.Configuration.GetConnectionString("Postgres"));
+        return builder.Build();
+    }
 
-            app.UseAuthentication();
-            
-            app.UseIdentityServer();
+    public static WebApplication ConfigurePipeline(this WebApplication app)
+    {
+        app.UseSerilogRequestLogging();
 
-            return app;
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseDeveloperExceptionPage();
         }
+
+        app.UseAuthentication();
+
+        app.UseIdentityServer();
+
+        return app;
     }
 }

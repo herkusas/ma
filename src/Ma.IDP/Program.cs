@@ -1,4 +1,5 @@
-﻿using Ma.IDP.Extensions;
+﻿using Dapper;
+using Ma.IDP.Extensions;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.Server.Kestrel.Https;
 using Serilog;
@@ -11,8 +12,8 @@ Log.Information("Starting up");
 
 try
 {
-    Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
-    
+    DefaultTypeMap.MatchNamesWithUnderscores = true;
+
     var builder = WebApplication.CreateBuilder(args);
 
     builder.Services.Configure<KestrelServerOptions>(options =>
@@ -20,9 +21,11 @@ try
         options.ConfigureHttpsDefaults(httpsConnectionAdapterOptions =>
             httpsConnectionAdapterOptions.ClientCertificateMode = ClientCertificateMode.AllowCertificate);
     });
-    
+
     builder.Host.UseSerilog((ctx, lc) => lc
-        .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}")
+        .WriteTo.Console(
+            outputTemplate:
+            "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}")
         .Enrich.FromLogContext()
         .ReadFrom.Configuration(ctx.Configuration));
 

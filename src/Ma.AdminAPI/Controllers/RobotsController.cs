@@ -1,39 +1,37 @@
 using Ma.AdminAPI.Authorization;
-using Ma.AdminAPI.Model;
-using Masters.Storage.Contracts;
+using Ma.Contracts;
+using Ma.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Ma.AdminAPI.Controllers
+namespace Ma.AdminAPI.Controllers;
+
+[ApiController]
+[Route("v1/robots")]
+public class RobotsController : ControllerBase
 {
-    [ApiController]
-    [Route("v1/robots")]
-    public class RobotsController : ControllerBase
+    private readonly IExtendedClientStore _clientStore;
+
+    public RobotsController(IExtendedClientStore clientStore)
     {
-        private readonly IExtendedClientStore _extendedClientStore;
+        _clientStore = clientStore;
+    }
 
-        public RobotsController(IExtendedClientStore extendedClientStore)
+    [HttpPut]
+    [Authorize(Policy = nameof(Policies.ManageRobots))]
+    public async Task<IActionResult> Save(RobotRecord request)
+    {
+        var client = request.Map();
+
+        var exist = await _clientStore.Exist(client);
+
+        if (!await _clientStore.AllScopeExist(client.AllowedScopes))
         {
-            _extendedClientStore = extendedClientStore;
+            return BadRequest(new {message = "Check if all scopes are registered within any resource"});
         }
-    
-        [HttpPut]
-        [Authorize(Policy = nameof(Policies.ManageRobots))]
-        public async Task<IActionResult> Save(RobotRecord request)
-        {
-            var client = request.Map();
 
-            var exist = await _extendedClientStore.Exist(client);
+        await _clientStore.Save(client);
 
-            if (!await _extendedClientStore.AllScopeExist(client.AllowedScopes))
-            {
-                return BadRequest(new {message = "Check if all scopes are registered within any resource"});
-            }
-
-            await _extendedClientStore.Save(client);
-        
-            return exist ? Ok(request) : 
-                CreatedAtAction(nameof(Save), new {Id = request.RobotId}, request);
-        }
+        return exist ? Ok(request) : CreatedAtAction(nameof(Save), new {Id = request.RobotId}, request);
     }
 }

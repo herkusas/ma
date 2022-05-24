@@ -1,7 +1,7 @@
+using Ma.HostingExtensions;
+using Ma.Middlewares;
+using Ma.Options;
 using Ma.SecureAPI.Authorization;
-using Ma.Shared.HostingExtensions;
-using Ma.Shared.Middlewares;
-using Ma.Shared.Options;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.Server.Kestrel.Https;
 
@@ -21,7 +21,7 @@ builder.Configuration.Bind(nameof(AuthOptions), authOptions);
 
 builder.AddAuthentication(authOptions);
 
-builder.AddAuthorization(policies: new Dictionary<string, string>{{nameof(Policies.GetWeather), Policies.GetWeather}});
+builder.AddAuthorization(new Dictionary<string, string> {{nameof(Policies.GetWeather), Policies.GetWeather}});
 
 var app = builder.Build();
 

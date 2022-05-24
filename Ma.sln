@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ma.SecureAPI", "src\Ma.Secu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ma.AdminAPI", "src\Ma.AdminAPI\Ma.AdminAPI.csproj", "{8FFBF09C-B4DA-42C6-A7DA-CEEE91C6EF99}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ma.Shared", "src\Ma.Shared\Ma.Shared.csproj", "{5501A34D-CF44-4A01-B2DF-1D6709D3559F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ma", "src\Ma\Ma.csproj", "{5501A34D-CF44-4A01-B2DF-1D6709D3559F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ma.Storage", "src\Ma.Storage\Ma.Storage.csproj", "{BC26F72C-5D9A-4717-B26D-34590A027A8B}"
 EndProject
@@ -18,6 +18,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{42B52131-7DA9-48BF-A899-4C7197032EB8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "local", "local", "{D4B0C872-5C97-4B48-B631-67E86111353B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ma.AdminAPI.Tests", "tests\Ma.AdminAPI.Tests\Ma.AdminAPI.Tests.csproj", "{A03A635C-E47D-47D8-ADA4-B650C93393F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{BC26F72C-5D9A-4717-B26D-34590A027A8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC26F72C-5D9A-4717-B26D-34590A027A8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC26F72C-5D9A-4717-B26D-34590A027A8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A03A635C-E47D-47D8-ADA4-B650C93393F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A03A635C-E47D-47D8-ADA4-B650C93393F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A03A635C-E47D-47D8-ADA4-B650C93393F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A03A635C-E47D-47D8-ADA4-B650C93393F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,6 +64,7 @@ Global
 		{C16F5E9E-DF6D-41AB-8DAE-B2174A9317A1} = {69CA921F-2739-43EF-B3F3-19C8D4EF803C}
 		{5501A34D-CF44-4A01-B2DF-1D6709D3559F} = {69CA921F-2739-43EF-B3F3-19C8D4EF803C}
 		{BC26F72C-5D9A-4717-B26D-34590A027A8B} = {69CA921F-2739-43EF-B3F3-19C8D4EF803C}
+		{A03A635C-E47D-47D8-ADA4-B650C93393F3} = {42B52131-7DA9-48BF-A899-4C7197032EB8}
 	EndGlobalSection
 	GlobalSection(RiderSharedRunConfigurations) = postSolution
 		File = src\.run\Master.WholeStack.run.xml

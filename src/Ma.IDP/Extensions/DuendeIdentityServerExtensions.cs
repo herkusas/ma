@@ -1,14 +1,13 @@
-﻿using Masters.Storage.Stores;
+﻿using Ma.Shared.Storage.Stores;
 
-namespace Ma.IDP.Extensions
+namespace Ma.IDP.Extensions;
+
+public static class DuendeIdentityServerExtensions
 {
-    public static class DuendeIdentityServerExtensions
+    public static void AddConfigurationStore(this IIdentityServerBuilder builder, string cN)
     {
-        public static void AddConfigurationStore(this IIdentityServerBuilder builder, string cN)
-        {
-            builder.Services.AddSingleton(cN);
-            builder.AddClientStore<ExtendedClientStore>();
-            builder.AddResourceStore<ExtendedResourceStore>();
-        }
+        builder.Services.AddSingleton(cN);
+        builder.AddClientStore<ExtendedClientStore>();
+        builder.AddResourceStore<ExtendedResourceStore>();
     }
 }

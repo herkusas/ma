@@ -1,9 +1,10 @@
+using Dapper;
 using FluentValidation.AspNetCore;
 using Ma.AdminAPI.Authorization;
-using Ma.Shared.HostingExtensions;
-using Ma.Shared.Options;
-using Masters.Storage.Contracts;
-using Masters.Storage.Stores;
+using Ma.Contracts;
+using Ma.HostingExtensions;
+using Ma.Options;
+using Ma.Shared.Storage.Stores;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.Server.Kestrel.Https;
 
@@ -14,7 +15,7 @@ builder.Services.AddControllers().AddFluentValidation(options =>
         includeInternalTypes: true, lifetime: ServiceLifetime.Singleton));
 builder.Services.AddEndpointsApiExplorer();
 
-Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
+DefaultTypeMap.MatchNamesWithUnderscores = true;
 
 builder.Services.Configure<KestrelServerOptions>(options =>
 {
@@ -33,10 +34,10 @@ builder.Configuration.Bind(nameof(AuthOptions), authOptions);
 
 builder.AddAuthentication(authOptions);
 
-builder.AddAuthorization(policies: new Dictionary<string, string>
+builder.AddAuthorization(new Dictionary<string, string>
 {
-    { nameof(Policies.ManageResources), Policies.ManageResources },
-    { nameof(Policies.ManageRobots), Policies.ManageRobots }
+    {nameof(Policies.ManageResources), Policies.ManageResources},
+    {nameof(Policies.ManageRobots), Policies.ManageRobots}
 });
 
 var app = builder.Build();
