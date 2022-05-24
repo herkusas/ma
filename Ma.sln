@@ -66,8 +66,4 @@ Global
 		{BC26F72C-5D9A-4717-B26D-34590A027A8B} = {69CA921F-2739-43EF-B3F3-19C8D4EF803C}
 		{A03A635C-E47D-47D8-ADA4-B650C93393F3} = {42B52131-7DA9-48BF-A899-4C7197032EB8}
 	EndGlobalSection
-	GlobalSection(RiderSharedRunConfigurations) = postSolution
-		File = src\.run\Master.WholeStack.run.xml
-		File = tests\.run\Master.WholeStack.run.xml
-	EndGlobalSection
 EndGlobal

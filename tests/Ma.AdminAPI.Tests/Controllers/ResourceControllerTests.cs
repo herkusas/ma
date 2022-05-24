@@ -12,18 +12,18 @@ namespace Ma.AdminAPI.Tests.Controllers;
 
 public class ResourceControllerTests
 {
-    private readonly IExtendedResourceStore _store;
-    private readonly ResourcesController _controller;
-    private static readonly List<string> s_scopes = new() {"test_scope"};
     private const string ResourceName = "resource_name";
+    private static readonly List<string> s_scopes = new() {"test_scope"};
     private readonly ApiResourceRecord _apiResourceRecord = new(ResourceName, s_scopes);
+    private readonly ResourcesController _controller;
+    private readonly IExtendedResourceStore _store;
 
     public ResourceControllerTests()
     {
         _store = Substitute.For<IExtendedResourceStore>();
         _controller = new ResourcesController(_store);
     }
-    
+
     [Fact]
     public async void Save_RequestIsValid_StoreSaveCalled()
     {
@@ -39,14 +39,15 @@ public class ResourceControllerTests
     {
         //arrange
         _store.Exist(Arg.Any<ApiResource>()).Returns(true);
-        
+
         //act
         var result = await _controller.Save(_apiResourceRecord);
 
         //assert 
-        result.Should().BeOfType<OkObjectResult>().Which.Value.Should().BeOfType<ApiResourceRecord>().Which.Name.Should().Be(ResourceName);
+        result.Should().BeOfType<OkObjectResult>().Which.Value.Should().BeOfType<ApiResourceRecord>().Which.Name
+            .Should().Be(ResourceName);
     }
-    
+
     [Fact]
     public async void Save_RequestIsValidRobotDoesNotExist_CreatedActionReturned()
     {
@@ -54,6 +55,7 @@ public class ResourceControllerTests
         var result = await _controller.Save(_apiResourceRecord);
 
         //assert 
-        result.Should().BeOfType<CreatedAtActionResult>().Which.Value.Should().BeOfType<ApiResourceRecord>().Which.Name.Should().Be(ResourceName);
+        result.Should().BeOfType<CreatedAtActionResult>().Which.Value.Should().BeOfType<ApiResourceRecord>().Which.Name
+            .Should().Be(ResourceName);
     }
 }

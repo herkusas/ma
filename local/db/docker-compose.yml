@@ -1,21 +1,21 @@
 version: '3'
 services:
- postgres:
-  image: postgres:latest
-  container_name: database
-  restart: always
-  ports:
-  - "5432:5432"
-  environment: 
-  - POSTGRES_PASSWORD=admin
-  - POSTGRES_DB=idp
-  healthcheck:
-   test: "pg_isready -q U postgres"
- flyway:
-  image: flyway/flyway:latest
-  container_name: migrations
-  command: -url=jdbc:postgresql://postgres/idp -schemas=public -user=postgres -password=admin migrate
-  volumes:
-   - ../db/migrations:/flyway/sql
-  depends_on:
-   - postgres
+  postgres:
+    image: postgres:latest
+    container_name: database
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=idp
+    healthcheck:
+      test: "pg_isready -q U postgres"
+  flyway:
+    image: flyway/flyway:latest
+    container_name: migrations
+    command: -url=jdbc:postgresql://postgres/idp -schemas=public -user=postgres -password=admin migrate
+    volumes:
+      - ../db/migrations:/flyway/sql
+    depends_on:
+      - postgres
