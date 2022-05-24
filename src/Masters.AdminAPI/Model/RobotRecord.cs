@@ -6,7 +6,8 @@ public record RobotRecord(
     string RobotId,
     string Name,
     ICollection<string> Scopes,
-    ICollection<string> Thumbprints
+    ICollection<string> Thumbprints,
+    int AccessTokenLifetime
 )
 {
     public Client Map()
@@ -18,7 +19,8 @@ public record RobotRecord(
             ClientId = RobotId,
             ClientName = Name,
             AllowedScopes = Scopes,
-            ClientSecrets = secrets
+            ClientSecrets = secrets,
+            AccessTokenLifetime = AccessTokenLifetime
         };
     }
 }

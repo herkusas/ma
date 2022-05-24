@@ -19,5 +19,22 @@
   <ItemGroup>
     <_ContentIncludedByDefault Remove="keys\is-signing-key-9127C0F44ECCD4B417A6F5058B6016AB.json" />
     <_ContentIncludedByDefault Remove="keys\is-signing-key-D20C1BE38441D0BA8EC5644045CDE9B4.json" />
+    <_ContentIncludedByDefault Remove="keys\is-signing-key-02272BF1F9B6ADAD1C4031CA689BED4D.json" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Compile Remove="keys\**" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <EmbeddedResource Remove="keys\**" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Remove="keys\**" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Content Remove="keys\**" />
   </ItemGroup>
 </Project>
